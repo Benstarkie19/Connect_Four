@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Connectfour</title>
     <meta name="description" content="">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{content-for "head"}}
-
+ <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/connectfour.css">
 
@@ -16,7 +17,9 @@
   </head>
   <body>
     {{content-for "body"}}
-
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="cordova_plugins.js"></script>
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/connectfour.js"></script>
 

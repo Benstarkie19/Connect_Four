@@ -1,5 +1,34 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<section id='app'>
+  <header>
+    <h1>{{#link-to 'maingame'}}Connect Four{{/link-to}}</h1>
+    <div class="text-center"> Connect four of your checkers in a row while preventing your opponent from doing the same. But, look out -- your opponent can sneak up on you and win the game!</div>
+  </header>
+  <article id="height">
+  </article>
+    <div class="choose-player show" id="choosePlayer">
+    <div class="actions">
+      <div class="choose-player-options">
+        <p>Who Playing First Then?</p>
+        <div class="form-group">
+          <input type="radio" id="you" name="player" value="you" checked />
+          <label for="you">You</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="api" name="player" value="api" />
+          <label for="api">AI</label>
+        </div>
+      </div>
+      <button id="startGame" class="btn">Start Game</button>
+    </div>
+  </div> 
+  <footer>
+    <div class="float-left">
+       by Benjamin Starkie
+        </div>
+        <div class="float-right">
+            created using <a href="https://www.emberjs.com/">Ember</a> 
+    </div>
+  </footer>
+</section>
 
 {{outlet}}
