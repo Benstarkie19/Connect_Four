@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<section id='app'>
+  <header>
+    <h1>Connect Four</h1>
+    <div class="text-center"> </div>
+  </header>
+  <article id="height">
+  </article>
+      <div class="choose-player-options">
+        <p>Who Playing First Then?</p>
+        <div class="form-group">
+          <input type="radio" id="you" name="player" value="you" checked />
+          <label for="you">You</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" id="api" name="player" value="api" />
+          <label for="api">AI</label>
+        </div>
+      </div> 
+  <footer>
+    <div class="float-left">
+       by Benjamin Starkie
+        </div>
+        <div class="float-right">
+            created using <a href="https://www.emberjs.com/">Ember</a> 
+    </div>
+  </footer>
+</section>
+
+{{outlet}}

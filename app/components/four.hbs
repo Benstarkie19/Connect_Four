@@ -1,0 +1,33 @@
+{{#if playing}}
+  {{#if desktop}}
+    <div class="text-center">
+      <button class = "restart" {{action "start"}}>Restart the game</button>
+    </div>
+  {{else}}
+    <div class="text-center">
+      <button class = "restart-mobile" {{action "start"}}>Restart the game</button>
+    </div>
+  {{/if}}
+  {{#if winner}}
+    <div class="game-message">
+      '{{winner}}'Player Won!
+    </div>
+  {{/if}}
+  {{#if draw}}
+    <div class="game-message">
+      Draw.
+    </div>
+  {{/if}}
+{{else}}
+  {{#if desktop}}
+    <div class="text-center">
+      <button class="start" {{action "start"}}>Start Game!</button>
+    </div>
+  {{else}}
+    <div class="text-center">
+      <button class="start-mobile" {{action "start"}}>Start Game!</button>
+    </div>
+  {{/if}}
+{{/if}}
+
+<canvas id="stage" width="360" height="400"></canvas>
