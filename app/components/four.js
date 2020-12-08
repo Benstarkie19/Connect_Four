@@ -605,7 +605,7 @@ function match_pattern(state, pattern, player) {
 function heuristic(state) {
   var score = 0;
   for (var idx = 0; idx < patterns.length; idx++) {
-    if (match_pattern(state, patterns[idx].pattern, 'Green')) {   // For the green marker
+    if (match_pattern(state, patterns[idx].pattern, 'yellow')) {   // For the yellow marker
       score = score + patterns[idx].score;
     }
     if (match_pattern(state, patterns[idx].pattern, 'White')) { // For the white marker
@@ -673,14 +673,14 @@ function minimax(state, limit, player) {
             if (limit === 1 || gamewinner(move.state) !== undefined) {
               move.score = heuristic(move.state);
             } else {
-              move.moves = minimax(move.state, limit - 1, player == 'White' ? 'Green' : 'White');
+              move.moves = minimax(move.state, limit - 1, player == 'White' ? 'yellow' : 'White');
               var score = undefined;
               for (var idx3 = 0; idx3 < move.moves.length; idx3++) {
                 if (score === undefined) {
                   score = move.moves[idx3].score;
                 } else if (player === 'White') {
                   score = Math.max(score, move.moves[idx3].score);
-                } else if (player === 'Green') {
+                } else if (player === 'yellow') {
                   score = Math.min(score, move.moves[idx3].score);
                 }
               }
@@ -696,7 +696,7 @@ function minimax(state, limit, player) {
 }
 
 function computer_player(state) {
-  var moves = minimax(state, 4, 'Green');
+  var moves = minimax(state, 4, 'yellow');
   var max_score = undefined;
   var move = undefined;
   for (var idx = 0; idx < moves.length; idx++) {
@@ -748,7 +748,7 @@ export default Component.extend({
     stage.addChild(board);
     var markers = {
       'White': [],
-      'Green': []
+      'yellow': []
     }
 
 
@@ -762,15 +762,15 @@ export default Component.extend({
       WhiteMarker.visible = false;
       stage.addChild(WhiteMarker);
       markers.White.push(WhiteMarker);
-      // Makes the green marker 
-      var GreenMarker = new createjs.Shape();
-      graphics = GreenMarker.graphics;
+      // Makes the yellow marker 
+      var yellowMarker = new createjs.Shape();
+      graphics = yellowMarker.graphics;
       graphics.beginFill('#ffb200');
       graphics.drawCircle(0, 0, 20);
       graphics.endFill();
-      GreenMarker.visible = false;
-      stage.addChild(GreenMarker);
-      markers.Green.push(GreenMarker);
+      yellowMarker.visible = false;
+      stage.addChild(yellowMarker);
+      markers.yellow.push(yellowMarker);
     }
     this.set('markers', markers);
     this.set('stage', stage);
@@ -803,13 +803,13 @@ export default Component.extend({
           setTimeout(function() {
             if (!component.get('winner') && !component.get('draw')) {
               var move = computer_player(state);
-              move_count = component.get('moves')['Green'];
-              state[move.x][move.y] = 'Green';
-              marker = component.get('markers')['Green'][move_count];
+              move_count = component.get('moves')['yellow'];
+              state[move.x][move.y] = 'yellow';
+              marker = component.get('markers')['yellow'][move_count];
               marker.visible = true;
               marker.x = 41 + move.x * 50;
               marker.y = 66 + move.y * 50;
-              component.get('moves')['Green'] = move_count + 1;
+              component.get('moves')['yellow'] = move_count + 1;
               component.get('stage').update();
               component.check_winner();
             }
@@ -842,7 +842,7 @@ export default Component.extend({
           createjs.Tween.get(markers.White[idx]).to({
             y: 600
           }, 500);
-          createjs.Tween.get(markers.Green[idx]).to({
+          createjs.Tween.get(markers.yellow[idx]).to({
             y: 600
           }, 500);
         }
@@ -868,7 +868,7 @@ export default Component.extend({
       ]);
       this.set('moves', {
         'White': 0,
-        'Green': 0
+        'yellow': 0
       });
 
       var markers = this.get('markers');
