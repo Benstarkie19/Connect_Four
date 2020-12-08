@@ -615,7 +615,15 @@ function heuristic(state) {
   return score;
 }
 
+//teaching.computing.edgehill.ac.uk/wte/parts/5124
 
+//week 4
+
+/*
+The first two lines of the code check that the x and y co-ordinates that are the next co-ordinates 
+to check the next pattern element against are still within the limits of the state. 
+Then, we get the first element out of the pattern and apply a number of tests.
+*/
 function match_pattern_at(state, pattern, player, x, y) {
   if (x >= 0 && x < state.length) {
     if (y >= 0 && y < state[x].length) {
@@ -640,6 +648,8 @@ function match_pattern_at(state, pattern, player, x, y) {
   return false;
 }
 
+
+//  https://teaching.computing.edgehill.ac.uk/wte/parts/5123?page=5123
 function minimax(state, limit, player) {
   var moves = [];
   if (limit > 0) {
@@ -657,6 +667,8 @@ function minimax(state, limit, player) {
               state: deepClone(state),
               score: 0
             };
+
+
             move.state[idx1][idx2] = player;
             if (limit === 1 || gamewinner(move.state) !== undefined) {
               move.score = heuristic(move.state);
@@ -683,7 +695,7 @@ function minimax(state, limit, player) {
   return moves;
 }
 
-function computer_move(state) {
+function computer_player(state) {
   var moves = minimax(state, 4, 'Green');
   var max_score = undefined;
   var move = undefined;
@@ -789,7 +801,7 @@ export default Component.extend({
           component.get('moves')['White'] = move_count + 1;
           setTimeout(function() {
             if (!component.get('winner') && !component.get('draw')) {
-              var move = computer_move(state);
+              var move = computer_player(state);
               move_count = component.get('moves')['Green'];
               state[move.x][move.y] = 'Green';
               marker = component.get('markers')['Green'][move_count];
