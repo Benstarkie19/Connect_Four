@@ -721,24 +721,26 @@ export default Component.extend({
     // eslint-disable-next-line no-undef
     var stage = new createjs.Stage(this.$('#stage')[0]);
     // eslint-disable-next-line no-undef
+
+
     var board = new createjs.Shape();
     var graphics = board.graphics;
-    graphics.beginFill('#353839');
-    graphics.drawRect(0, 0, 350, 2);
-    graphics.drawRect(350, 0, 2, 300);
+    graphics.beginFill('#bf5a5a');
+    graphics.drawRect(0, 0, 400, 2);
+    graphics.drawRect(400, 0, 2, 300);
     graphics.drawRect(0, 0, 2, 300);
-    graphics.drawRect(0, 300, 352, 2);
+    graphics.drawRect(0, 300, 400, 2);
     graphics.drawRect(50, 0, 2, 300);
     graphics.drawRect(100, 0, 2, 300);
     graphics.drawRect(150, 0, 2, 300);
     graphics.drawRect(200, 0, 2, 300);
     graphics.drawRect(250, 0, 2, 300);
     graphics.drawRect(300, 0, 2, 300);
-    graphics.drawRect(0, 50, 350, 2);
-    graphics.drawRect(0, 100, 350, 2);
-    graphics.drawRect(0, 150, 350, 2);
-    graphics.drawRect(0, 200, 350, 2);
-    graphics.drawRect(0, 250, 350, 2);
+    graphics.drawRect(0, 50, 400, 2);
+    graphics.drawRect(0, 100, 400, 2);
+    graphics.drawRect(0, 150, 400, 2);
+    graphics.drawRect(0, 200, 400, 2);
+    graphics.drawRect(0, 250, 400, 2);
     board.x = 15;
     board.y = 40;
     board.alpha = 0;
@@ -748,20 +750,23 @@ export default Component.extend({
       'White': [],
       'Green': []
     }
+
+
     for (var x = 0; x < 21; x++) {
+      // Makes the whilte marker 
       var WhiteMarker = new createjs.Shape();
       graphics = WhiteMarker.graphics;
       graphics.beginFill('#ffffff');
-      graphics.setStrokeStyle(10);
-      graphics.drawCircle(0, 0, 23);
+      graphics.drawCircle(0, 0, 20);
       graphics.endFill();
       WhiteMarker.visible = false;
       stage.addChild(WhiteMarker);
       markers.White.push(WhiteMarker);
+      // Makes the green marker 
       var GreenMarker = new createjs.Shape();
       graphics = GreenMarker.graphics;
-      graphics.beginFill('#0cfe20');
-      graphics.drawCircle(0, 0, 23);
+      graphics.beginFill('#ffb200');
+      graphics.drawCircle(0, 0, 20);
       graphics.endFill();
       GreenMarker.visible = false;
       stage.addChild(GreenMarker);
@@ -772,12 +777,8 @@ export default Component.extend({
     createjs.Ticker.addEventListener("tick", stage);
   },
 
-  willDestroyElement: function() {
-    this._super(...arguments);
-    if (shake) {
-      shake.stopWatch();
-    }
-  },
+
+// https://teaching.computing.edgehill.ac.uk/wte/parts/5121?page=5121
   click: function(ev) {
     var component = this;
     if (component.get('playing') && !component.get('winner')) {
@@ -869,10 +870,12 @@ export default Component.extend({
         'White': 0,
         'Green': 0
       });
-      this.set('player', 'White');
 
       var markers = this.get('markers');
       this.get('stage').update();
+      this.set('player', 'White');
+
+
     }
   }
 });
