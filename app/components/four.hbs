@@ -1,11 +1,11 @@
 {{#if playing}}
   {{#if desktop}}
     <div class="text-center">
-      <button class = "restart" {{action "start"}}>Restart the game</button>
+      <button {{action "start"}}>Restart the game</button>
     </div>
   {{else}}
     <div class="text-center">
-      <button class = "restart-mobile" {{action "start"}}>Restart the game</button>
+      <button  {{action "start"}}>Restart the game</button>
     </div>
   {{/if}}
   {{#if winner}}
@@ -21,11 +21,11 @@
 {{else}}
   {{#if desktop}}
     <div class="text-center">
-      <button class="start" {{action "start"}}>Start Game!</button>
+      <button {{action "start"}}>Start Game!</button>
     </div>
   {{else}}
     <div class="text-center">
-      <button class="start-mobile" {{action "start"}}>Start Game!</button>
+      <button {{action "start"}}>Start Game!</button>
     </div>
   {{/if}}
 {{/if}}
