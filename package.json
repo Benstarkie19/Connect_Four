@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@ember/jquery": "^1.1.0",
+    "cordova": "^10.0.0",
     "easeljs": "^1.0.2",
     "soundjs": "^1.0.1",
     "tweenjs": "^1.0.2"
