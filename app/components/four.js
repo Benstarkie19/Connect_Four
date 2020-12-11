@@ -23,6 +23,9 @@ function deepClone(state) {
 }
 // https://teaching.computing.edgehill.ac.uk/wte/parts/5121?page=5121
 // Keep reading this 
+
+//this looks for the winner states of  the game 
+// If the patterns match the player wins
 function gamewinner(state) {
   var patterns = [
     [
@@ -73,7 +76,7 @@ function gamewinner(state) {
       [4, 2],
       [5, 3]
     ],
-    
+
     [
       [2, 2],
       [3, 3],
@@ -98,7 +101,7 @@ function gamewinner(state) {
       [5, 3],
       [6, 4]
     ],
-    
+
     [
       [6, 0],
       [5, 1],
@@ -443,6 +446,8 @@ function gamewinner(state) {
     ],
   ];
 
+
+  //  minimax algorithm to implement a compuer player to play against
   for (var pidx = 0; pidx < patterns.length; pidx++) {
     var pattern = patterns[pidx];
     var winner = state[pattern[0][0]][pattern[0][1]];
@@ -461,6 +466,7 @@ function gamewinner(state) {
     }
   }
   // eslint-disable-next-line no-unused-vars
+  //f we have neither a winner, nor any playable fields, then it is a draw
   var draw = true;
   for (var x = 0; x <= 6; x++) {
     for (var y = 0; y <= 5; y++) {
@@ -471,7 +477,7 @@ function gamewinner(state) {
   }
   return '';
 }
-
+//technique called "pattern matching" to test whether the board contains any of the patterns we specify
 var patterns = [{
     pattern: [
       ['p', 0, 1],
@@ -605,7 +611,7 @@ function match_pattern(state, pattern, player) {
 function heuristic(state) {
   var score = 0;
   for (var idx = 0; idx < patterns.length; idx++) {
-    if (match_pattern(state, patterns[idx].pattern, 'yellow')) {   // For the yellow marker
+    if (match_pattern(state, patterns[idx].pattern, 'yellow')) { // For the yellow marker
       score = score + patterns[idx].score;
     }
     if (match_pattern(state, patterns[idx].pattern, 'White')) { // For the white marker
@@ -722,7 +728,7 @@ export default Component.extend({
     var stage = new createjs.Stage(this.$('#stage')[0]);
     // eslint-disable-next-line no-undef
 
-
+    //In EaselJS all drawings we wish to place on the stage are created as createjs.
     var board = new createjs.Shape();
     var graphics = board.graphics;
     graphics.beginFill('#bf5a5a');
@@ -750,8 +756,8 @@ export default Component.extend({
       'White': [],
       'yellow': []
     }
-
-
+    //Then graphics.drawRect() is used to draw the game board
+    //Then graphics.drawCircle() is used to draw the circle then fill it with a colour
     for (var x = 0; x < 21; x++) {
       // Makes the whilte marker 
       var WhiteMarker = new createjs.Shape();
@@ -778,7 +784,8 @@ export default Component.extend({
   },
 
 
-// https://teaching.computing.edgehill.ac.uk/wte/parts/5121?page=5121
+  // https://teaching.computing.edgehill.ac.uk/wte/parts/5121?page=5121
+  // Click functions lets the player click where his marker wants to be placed
   click: function(ev) {
     var component = this;
     if (component.get('playing') && !component.get('winner')) {
@@ -802,6 +809,7 @@ export default Component.extend({
           component.get('moves')['White'] = move_count + 1;
           setTimeout(function() {
             if (!component.get('winner') && !component.get('draw')) {
+              //The computer_player function takes the current state and returns an object with x and y 
               var move = computer_player(state);
               move_count = component.get('moves')['yellow'];
               state[move.x][move.y] = 'yellow';
@@ -819,6 +827,7 @@ export default Component.extend({
       }
     }
   },
+  // The  end  of the code  shows the check  winner function  which chooses the winner  from the pattern.
   check_winner: function() {
     var state = this.get('state');
     var winner = gamewinner(state);
